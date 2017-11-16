@@ -1,0 +1,131 @@
+
+.navbar {
+  max-height: 59px;
+  padding-top: 0;
+}
+
+.navbar-brand {
+  float:left;
+  width:100%;
+  height:auto;
+  padding:0px 0px;
+}
+
+.navbar-right-profile {
+  margin-right: 25px;
+  padding-top: 10px; 
+}
+
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-nav > .active >a {
+  color: #3333FF;
+/*  font-weight: bold;*/
+  font-size: 15px;
+}
+
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:focus,
+.navbar-default .navbar-nav>.active>a:hover {
+  background-color: #e7e7e7;
+}
+
+.center {
+  width: auto;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body { 
+  padding-top: 60px; 
+  padding-bottom: 35px;
+}
+
+.footer {
+  background: #000;
+}
+
+.footer-fixed {
+  position:fixed;
+  right:0;
+  left:0;
+  z-index:1030;
+  border-radius:0;
+  bottom:0;margin-bottom:0;border-width:1px 0 0;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.color-header {
+  color: #3366FF;
+}
+
+.over_flow {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.hi_manage {
+  display: none;
+}
+
+.dl-horizontal dt{
+    text-align: left;
+    width: auto;
+    padding-right: 1em;
+}
+
+.dl-horizontal dd{
+    margin-left: 0;
+}
+
+.hidden-show {
+  display: none;
+}
+
+.show-hidden {
+  display: block;
+}
+
+@media(max-width: 768px) {
+  .navbar {
+    max-height: 50px;
+    padding-top: 0;
+  }
+  .navbar-brand {
+  float:left;
+  width:70%;
+  height:auto;
+  padding:0px 0px;
+  }
+  .navbar-right-profile {
+  margin-right: 25px;
+  padding-top: 0px; 
+  }
+  body { 
+    padding-top: 50px; 
+    padding-bottom: 50px;
+  }
+  
+  .hidden-show {
+    display: block;
+  }
+  
+  .show-hidden {
+    display: none;
+  }
+}
+
+/*
+.brand {  
+    background: url(templatemo_logo_watts.png) no-repeat left center;  
+    background-size: 49px 33px;  
+    text-indent: 35px;  
+}
+*/
+

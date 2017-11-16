@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>新疆沃茨流体控制设备有限公司-网站管理</title>
+    <meta name="keywords" content="新疆沃茨，沃茨，套筒式调节阀，固定锥形消能阀，调节阀，减压阀，蝶阀，固定锥形阀，闸阀，水泵控制阀，流体控制设备，多喷孔套筒式减压阀，调流消能阀，套筒式多喷孔减压阀" />
+    <meta name="description" content="新疆沃茨流体控制设备有限公司是一家特种阀门生产和销售公司,产品包括调节阀、蝶阀、闸阀、止回阀、水泵控制阀等" />
+    
+    <!-- Bootstrap -->
+    
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/fxlovely.css" rel="stylesheet">
+    
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/static/js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/static/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="navbar-header">
+	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	  <span class="sr-only">导航栏折叠</span>
+	  <span class="icon-bar"></span>
+	  <span class="icon-bar"></span>
+	  <span class="icon-bar"></span>
+	</button>
+	
+	<a class="navbar-brand" href="{{url_for('index')}}">
+	  <img alt="新疆沃茨" class="img-responsive" src="/static/templatemo_logo_watts.png">
+	</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	<ul class="nav navbar-nav navbar-right navbar-right-profile">
+	  <li><a href="{{url_for('index')}}">网站首页 <span class="sr-only">(current)</span></a></li>
+	  <li><a href="{{url_for('about')}}">关于我们</a></li>
+	  <li><a href="{{url_for('news')}}">新闻资讯</a></li>
+	  <li><a href="{{url_for('products')}}">产品中心</a></li>
+	  <li><a href="{{url_for('sales')}}">销售业绩</a></li>
+	  <li><a href="{{url_for('hr')}}">人才招聘</a></li>
+	  <li><a href="{{url_for('contact')}}">联系我们</a></li>
+	</ul>
+      </div>
+    </nav>
+    
+    {% with messages = get_flashed_messages() %}
+	{% if messages %}
+	  <div class="alert alert-info">
+		    <ul class="flashes">
+		    {% for message in messages %}
+		      <li>{{ message }}</li>
+		    {% endfor %}
+		    </ul>
+	  </div>
+	{% endif %}
+    {% endwith %}
+    
+    <div class="container">
+    <div class="row">
+    <div class="page-header"></div>
+    <div class="col-sm-10">
+    
+    <div class="jumbotron {{ 'hi_manage' if m_idx != 0 }}">
+        <h1>网站信息管理页面</h1>
+        <p>请从右侧选择需要管理的项目分别进行管理；</p>
+        <p>目前已有的项目如需修改请先删除原条目然后重新添加；</p>
+        <p>产品管理页面只能上传一张图片，其他页面最多只能上传3个文件；</p>
+        <p>上传文件名称不得为中文；</p>
+        <p>图片文件要求后缀为jpg、jpeg、png、gif等格式；</p>
+        <p>视频文件要求后缀为mp4、mov等格式</p>
+    </div>
+    
+    <div class="panel-group">
+    <div class="panel panel-success {{ 'hi_manage' if m_idx != 1 }}">
+      <div class="panel-heading">产品管理</div>
+	<h3 class="text-center">产品列表</h3>
+	<table class="table table-hover">
+	  <tr>
+	    <th>#
+	    <th>名称
+	    <th>类型
+	    <th>创建时间
+            <th>创建人
+	    <th>媒体文件
+	    <th>操作
+	  {% for products_h in productsx %}
+	  <tr>
+	    <td><a href="{{ url_for('products_detail', products_id = products_h.id) }}">{{ products_h.id }}</a>
+	    <td><div class="over_flow" style="max-width: 170px">{{ products_h.title }}</div>
+	    <td><div class="over_flow" style="max-width: 210px">{{ products_h.item }}</div>
+	    <td>{{ products_h.pub_date.strftime('%Y-%m-%d %H:%M') }}
+            <div>
+                {% if products_h.user_id == 1 %}
+                    <td>xjwatts
+                {% elif products_h.user_id == 2 %}
+                    <td>xjwatts.ct
+                {% elif products_h.user_id == 3 %}
+                    <td>xjwatts.lyj
+                {% elif products_h.user_id == 0 %}
+                    <td>root
+                {% endif %}
+            </div>
+	    <td><div class="over_flow" style="max-width: 320px">{{ products_h.pic1 }}</div>
+	    <td><a href="{{ url_for('delete_products', products_id = products_h.id) }}">Delete</a></td>
+	  
+	  {% endfor %}
+	</table>
+      <hr>
+      <form action="" method=post enctype="multipart/form-data">
+	<h2>添加新产品介绍</h2>
+	<div class="form-group">
+	  <input type="text" id="title" name="title" class="form-control" placeholder="产品名称" required="">
+	</div>
+
+	<div class="form-group">
+	  <textarea name="text" rows=10 class="form-control" placeholder="产品描述" required=""></textarea>
+	</div>
+	
+	<div class="form-group">
+	  <select class="form-control" name="item" required="">
+	    <option value="A">套筒式多喷孔减压阀(类型A)</p></option>
+	    <option value="B">固定锥形消能阀(类型B)</option>
+	    <option value="C">蝶阀系列(类型C)</option>
+	    <option value="D">闸阀/止回阀/水泵控制阀(类型D)</option>
+	    <option value="E">其他产品(类型E)</option>
+	  </select>
+	</div>
+      
+	<div class="form-group">
+	  <label for="pfile">上传文件</label>
+	  <input type="file" id="pfile" name="pfile">
+	</div>
+
+	<div class="form-group">
+	  <button type="submit" class="btn btn-success">提交</button>
+	</div>
+      </form>
+    </div>
+    
+    <div class="panel panel-success {{ 'hi_manage' if m_idx != 2 }}">
+      <div class="panel-heading">业绩管理</div>
+	<h3 class="text-center">业绩列表</h3>
+	<table class="table table-hover">
+	  <tr>
+	    <th>#
+	    <th>项目名称
+	    <th>描述
+	    <th>年度
+	    <th>创建时间
+	    <th>创建人
+	    <th>媒体文件
+	    <th>操作
+	  {% for sales_h in salesx %}
+	  <tr>
+	    <td><a href="{{ url_for('sales_detail', sales_id = sales_h.id) }}">{{ sales_h.id }}</a>
+	    <td><div class="over_flow" style="max-width: 170px">{{ sales_h.title }}</div>
+	    <td><div class="over_flow" style="max-width: 210px">{{ sales_h.text }}</div>
+	    <td>{{ sales_h.year }}
+	    <td>{{ sales_h.pub_date.strftime('%Y-%m-%d %H:%M') }}
+	    <div>
+                {% if sales_h.user_id == 1 %}
+                    <td>xjwatts
+                {% elif sales_h.user_id == 2 %}
+                    <td>xjwatts.ct
+                {% elif sales_h.user_id == 3 %}
+                    <td>xjwatts.lyj
+                {% elif sales_h.user_id == 0 %}
+                    <td>root
+                {% endif %}
+            </div>
+	    <td><div class="over_flow" style="max-width: 320px">{{ sales_h.pic1 }} | {{ sales_h.pic2 }} | {{ sales_h.pic3 }}</div>
+	    <td><a href="{{ url_for('delete_sales', sales_id = sales_h.id) }}">Delete</a></td>
+	  
+	  {% endfor %}
+	</table>
+      <hr>
+      <form action="" method=post enctype="multipart/form-data">
+	<h3 class="text-center">添加新项目介绍</h3>
+	<div class="form-group">
+	  <input type="text" id="title" name="title" class="form-control" placeholder="项目名称" required="">
+	</div>
+
+	<div class="form-group">
+	  <textarea name="text" rows=10 class="form-control" placeholder="项目介绍" required=""></textarea>
+	</div>
+      
+	<div class="form-group">
+	  <select class="form-control" name="year" required="">
+	    <option value="2011">2011年度及以前</p></option>
+	    <option value="2012">2012年度</option>
+	    <option value="2013">2013年度</option>
+	    <option value="2014">2014年度</option>
+	    <option value="2015">2015年度</option>
+	  </select>
+	</div>
+	
+	<div class="form-group">
+	  <label for="pfile">上传文件</label>
+	  <input type="file" id="pfile" multiple="" name="pfile[]">
+	</div>
+
+	<div class="form-group">
+	  <button type="submit" class="btn btn-success">提交</button>
+	</div>
+      </form>
+    </div>
+    
+    <div class="panel panel-success {{ 'hi_manage' if m_idx != 3 }}" >
+      <div class="panel-heading">新闻资讯管理</div>
+	<h3 class="text-center">新闻资讯列表</h3>
+	<table class="table table-hover">
+	  <tr>
+	    <th>#
+	    <th>标题
+	    <th>内容
+	    <th>创建时间
+	    <th>创建人
+	    <th>媒体文件
+	    <th>操作
+	  {% for news_h in newsx %}
+	  <tr>
+	    <td><a href="{{ url_for('news_detail', news_id = news_h.id) }}">{{ news_h.id }}</a>
+	    <td><div class="over_flow" style="max-width: 170px">{{ news_h.title }}</div>
+	    <td><div class="over_flow" style="max-width: 210px">{{ news_h.text }}</div>
+	    <td>{{ news_h.pub_date.strftime('%Y-%m-%d %H:%M') }}
+	    <div>
+                {% if news_h.user_id == 1 %}
+                    <td>xjwatts
+                {% elif news_h.user_id == 2 %}
+                    <td>xjwatts.ct
+                {% elif news_h.user_id == 3 %}
+                    <td>xjwatts.lyj
+                {% elif news_h.user_id == 0 %}
+                    <td>root
+                {% endif %}
+            </div>
+	    <td><div class="over_flow" style="max-width: 320px">{{ news_h.pic1 }} | {{ news_h.pic2 }} | {{ news_h.pic3 }}</div>
+	    <td><a href="{{ url_for('delete_news', news_id = news_h.id) }}">Delete</a></td>
+	  
+	  {% endfor %}
+	</table>
+      <hr>
+      <form action="" method=post enctype="multipart/form-data">
+	<h3 class="text-center">添加新文章</h3>
+	<div class="form-group">
+	  <input type="text" id="title" name="title" class="form-control" placeholder="新闻标题" required="">
+	</div>
+
+	<div class="form-group">
+	  <textarea name="text" rows=10 class="form-control" placeholder="新闻描述" required=""></textarea>
+	</div>
+      
+	<div class="form-group">
+	  <label for="pfile">上传文件</label>
+	  <input type="file" id="pfile" multiple="" name="pfile[]">
+	</div>
+
+	<div class="form-group">
+	  <button type="submit" class="btn btn-success">提交</button>
+	</div>
+      </form>
+    </div>
+    
+    <div class="panel panel-success {{ 'hi_manage' if m_idx != 4 }}">
+      <div class="panel-heading">试验视频管理</div>
+	<h3 class="text-center">视频列表</h3>
+	<table class="table table-hover">
+	  <tr>
+	    <th>#
+	    <th>标题
+	    <th>内容
+	    <th>创建时间
+	    <th>创建人
+	    <th>媒体文件
+	    <th>操作
+	  {% for videos_h in videosx %}
+	  <tr>
+	    <td><a href="{{ url_for('videos_detail', videos_id = videos_h.id) }}">{{ videos_h.id }}</a>
+	    <td><div class="over_flow" style="max-width: 170px">{{ videos_h.title }}</div>
+	    <td><div class="over_flow" style="max-width: 210px">{{ videos_h.text }}</div>
+	    <td>{{ videos_h.pub_date.strftime('%Y-%m-%d %H:%M') }}
+	    <div>
+                {% if videos_h.user_id == 1 %}
+                    <td>xjwatts
+                {% elif videos_h.user_id == 2 %}
+                    <td>xjwatts.ct
+                {% elif videos_h.user_id == 3 %}
+                    <td>xjwatts.lyj
+                {% elif videos_h.user_id == 0 %}
+                    <td>root
+                {% endif %}
+            </div>
+	    <td><div class="over_flow" style="max-width: 320px">{{ videos_h.vid1 }} | {{ videos_h.vid2 }} | {{ videos_h.vid3 }}</div>
+	    <td><a href="{{ url_for('delete_videos', videos_id = videos_h.id) }}">Delete</a></td>
+	  
+	  {% endfor %}
+	</table>
+      <hr>
+      <form action="" method=post enctype="multipart/form-data">
+	<h3 class="text-center">添加新视频</h3>
+	<div class="form-group">
+	  <input type="text" id="title" name="title" class="form-control" placeholder="输入标题" required="">
+	</div>
+
+	<div class="form-group">
+	  <textarea name="text" rows=10 class="form-control" placeholder="视频描述" required=""></textarea>
+	</div>
+      
+	<div class="form-group">
+	  <label for="pfile">上传文件</label>
+	  <input type="file" id="pfile" multiple="" name="pfile[]">
+	</div>
+
+	<div class="form-group">
+	  <button type="submit" class="btn btn-success">提交</button>
+	</div>
+      </form>
+    </div>
+    
+    <div class="panel panel-success {{ 'hi_manage' if m_idx != 5 }}">
+      <div class="panel-heading">用户反馈管理</div>
+	<h2>用户反馈列表</h2>
+	<table class="table table-hover">
+	  <tr>
+	    <th>#
+	    <th>标题
+	    <th>内容
+	    <th>创建时间
+	    <th>创建人
+	    <th>媒体文件
+	    <th>操作
+	  {% for customer_h in customerx %}
+	  <tr>
+	    <td><a href="{{ url_for('customer_detail', customer_id = customer_h.id) }}">{{ customer_h.id }}</a>
+	    <td><div class="over_flow" style="max-width: 170px">{{ customer_h.title }}</div>
+	    <td><div class="over_flow" style="max-width: 210px">{{ customer_h.text }}</div>
+	    <td>{{ customer_h.pub_date.strftime('%Y-%m-%d %H:%M') }}
+	    <div>
+                {% if customer_h.user_id == 1 %}
+                    <td>xjwatts
+                {% elif customer_h.user_id == 2 %}
+                    <td>xjwatts.ct
+                {% elif customer_h.user_id == 3 %}
+                    <td>xjwatts.lyj
+                {% elif customer_h.user_id == 0 %}
+                    <td>root
+                {% endif %}
+            </div>
+	    <td><div class="over_flow" style="max-width: 320px">{{ customer_h.pic1 }} | {{ customer_h.pic2 }} | {{ customer_h.pic3 }}</div>
+	    <td><a href="{{ url_for('delete_customer', customer_id = customer_h.id) }}">Delete</a></td>
+	  
+	  {% endfor %}
+	</table>
+      <hr>
+      <form action="" method=post enctype="multipart/form-data">
+	<h3 class="text-center">添加反馈</h3>
+	<div class="form-group">
+	  <input type="text" id="title" name="title" class="form-control" placeholder="输入标题" required="">
+	</div>
+
+	<div class="form-group">
+	  <textarea name="text" rows=10 class="form-control" placeholder="用户反馈描述" required=""></textarea>
+	</div>
+      
+	<div class="form-group">
+	  <label for="pfile">上传文件</label>
+	  <input type="file" id="pfile" multiple="" name="pfile[]">
+	</div>
+
+	<div class="form-group">
+	  <button type="submit" class="btn btn-success">提交</button>
+	</div>
+      </form>
+    </div>
+    <div class="panel panel-success {{ 'hi_manage' if m_idx != 6 }}">
+      <div class="panel-heading">网站在线留言管理</div>
+	<h2>留言列表</h2>
+	<table class="table table-hover">
+	  <tr>
+	    <th>#
+	    <th>姓名
+	    <th>联系电话
+	    <th>电子邮件
+	    <th>留言信息
+	    <th>留言时间
+	    
+	  {% for messages_h in messagesx %}
+	  <tr>
+	    <td>{{ messages_h.id }}
+	    <td><div class="over_flow" style="max-width: 70px">{{ messages_h.inputName }}</div>
+	    <td><div class="over_flow" style="max-width: 90px">{{ messages_h.inputPhone }}</div>
+	    <td><div class="over_flow" style="max-width: 190px">{{ messages_h.inputEmail }}</div>
+	    <td><div class="over_flow" style="max-width: 490px">{{ messages_h.inputText }}</div>
+	    <td>{{ messages_h.pub_date.strftime('%Y-%m-%d %H:%M') }}
+	    
+	  
+	  {% endfor %}
+	</table>
+      <hr>
+    </div>
+    
+    </div>
+    </div>
+    
+    <div class="col-sm-2">
+      <ul class="list-group">
+	<a class="list-group-item" href="/manage/1">1.产品管理</a>
+	<a class="list-group-item" href="/manage/2">2.业绩管理</a>
+	<a class="list-group-item" href="/manage/3">3.新闻资讯管理</a>
+	<a class="list-group-item" href="/manage/4">4.试验视频管理</a>
+	<a class="list-group-item" href="/manage/5">5.用户反馈管理</a>
+	<a class="list-group-item" href="/manage/6">6.网站在线留言管理</a>
+      </ul>
+    </div>
+    
+    </div>
+    
+    </div>
+    
+    <footer class="footer footer-fixed">
+      <div class="container">
+        <p class="text-muted">Copyright © 2014 <a href="{{url_for('index')}}">新疆沃茨流体控制设备有限公司</a> | <a href="http://ym.163.com">邮箱登陆</a> | <a href="{{url_for('manage')}}">网站管理</a>
+	  {% if g.user.is_authenticated()%}
+	    <a href="/logout"> | 退出登录</a>
+	    {% if userx == 0 %}
+                root
+            {% elif userx == 1 %}
+                xjwatts
+            {% elif userx == 2 %}
+                xjwatts.ct
+            {% elif userx == 3 %}
+                xjwatts.lyj
+            {% endif %}
+	  {% endif %}
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
